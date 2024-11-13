@@ -11,16 +11,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Menu Cake Hari Ini',
       theme: ThemeData(
-        primarySwatch: Colors.pink, 
+        primarySwatch: Colors.pink,
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.pink[100], 
-          foregroundColor: Colors.white, 
+          backgroundColor: Colors.pink[100],
+          foregroundColor: Colors.white,
         ),
-        cardColor: Colors.pink[100], 
+        cardColor: Colors.pink[100],
         elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-          ),
+          style: ElevatedButton.styleFrom(),
         ),
       ),
       home: MyHomePage(title: 'Menu Cake Hari Ini'),
@@ -42,14 +41,55 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            // Handle back button press
-          },
-        ),
         title: Text(widget.title),
         centerTitle: true,
+        // Tombol hamburger untuk membuka drawer
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {
+            Scaffold.of(context).openDrawer();
+          },
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.pink[200],
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -139,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
     required String imageUrl,
   }) {
     return Card(
-      color: Colors.pink[50], 
+      color: Colors.pink[50],
       elevation: 2,
       child: Stack(
         children: [
